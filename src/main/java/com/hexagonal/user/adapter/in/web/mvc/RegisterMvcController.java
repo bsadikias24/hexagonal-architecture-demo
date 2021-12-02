@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequiredArgsConstructor
 class RegisterMvcController {
-
   private final RegisterUseCase registerUseCase;
 
   @PostMapping("/mvc/register/")

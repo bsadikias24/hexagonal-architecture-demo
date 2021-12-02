@@ -1,4 +1,4 @@
-package com.hexagonal.user.application;
+package com.hexagonal.user.application.service;
 
 import com.hexagonal.user.application.model.User;
 import com.hexagonal.user.application.port.in.RegisterUseCase;
