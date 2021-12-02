@@ -17,11 +17,10 @@ public class RegisterService implements RegisterUseCase{
 
   private final SendMailPort sendMailPort;
 
-  public Long registerUser(RegisterUseCase.RegisterCommand registerCommand) {
-    User user= new User(registerCommand.getName(), registerCommand.getEmail());
+  public Long registerUser(User user, boolean isSendWelcomeMail) {
     user.setRegistrationDate(LocalDateTime.now());
     // Some logic here
-    if(registerCommand.isSendWelcomeMail()){
+    if(isSendWelcomeMail){
       sendMailPort.sendMail("Welcome!", "Thanks for registering.");
     }
     return saveUserPort.saveUser(user);

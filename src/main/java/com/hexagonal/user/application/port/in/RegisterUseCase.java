@@ -1,17 +1,7 @@
 package com.hexagonal.user.application.port.in;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.hexagonal.user.application.model.User;
 
 public interface RegisterUseCase {
-    Long registerUser(RegisterCommand registerCommand);
-    @Data
-    @AllArgsConstructor
-    class RegisterCommand {
-        private String name;
-        private String email;
-
-        private boolean sendWelcomeMail;
-
-    }
+    Long registerUser(User user, boolean isSendWelcomeMail);
 }
