@@ -1,12 +1,10 @@
-package com.hexagonal.user.adapter.in.web;
-
-import javax.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
+package com.hexagonal.user.adapter.in.web.mvc;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hexagonal.user.application.model.User;
 import lombok.Value;
+
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Value
 public class UserResource {
@@ -25,9 +23,5 @@ public class UserResource {
     this.name = name;
     this.email = email;
     this.registrationDate = null;
-  }
-
-  public User toModel() {
-    return new User(name, email);
   }
 }

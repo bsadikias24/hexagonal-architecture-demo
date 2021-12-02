@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 public interface RegisterUseCase {
-    Long registerUser(User user, boolean sendEmail);
+    Long registerUser(RegisterCommand registerCommand);
     @Data
     @AllArgsConstructor
     class RegisterCommand {
@@ -13,6 +13,8 @@ public interface RegisterUseCase {
         private String email;
 
         private boolean sendWelcomeMail;
-
+        public User toModel(){
+            return new User(name,email);
+        }
     }
 }

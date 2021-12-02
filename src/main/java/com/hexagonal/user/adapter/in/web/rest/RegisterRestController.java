@@ -1,4 +1,4 @@
-package com.hexagonal.user.adapter.in.web;
+package com.hexagonal.user.adapter.in.web.rest;
 
 import javax.validation.Valid;
 
@@ -22,7 +22,7 @@ class RegisterRestController {
           @Valid @RequestBody UserResource userResource,
           @RequestParam("sendWelcomeMail") boolean sendWelcomeMail) {
 
-    registerUseCase.registerUser(userResource.toModel(), sendWelcomeMail);
+    registerUseCase.registerUser(new RegisterUseCase.RegisterCommand(userResource.getName(),userResource.getEmail(), sendWelcomeMail));
 
     return new UserResource(
             userResource.getName(),

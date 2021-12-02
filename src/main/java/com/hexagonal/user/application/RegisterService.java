@@ -1,29 +1,30 @@
 package com.hexagonal.user.application;
 
-import java.time.LocalDateTime;
-
 import com.hexagonal.user.application.model.User;
+import com.hexagonal.user.application.port.in.RegisterUseCase;
 import com.hexagonal.user.application.port.out.SaveUserPort;
 import com.hexagonal.user.application.port.out.SendMailPort;
-import com.hexagonal.user.application.port.in.RegisterUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
-public class RegisterService implements RegisterUseCase{
+public class RegisterService implements RegisterUseCase {
 
-  private final SaveUserPort saveUserPort;
+    private final SaveUserPort saveUserPort;
 
-  private final SendMailPort sendMailPort;
+    private final SendMailPort sendMailPort;
 
-  public Long registerUser(User user, boolean sendEmail) {
-    user.setRegistrationDate(LocalDateTime.now());
-    // Some logic here
-    if(sendEmail){
-      sendMailPort.sendMail("Welcome!", "Thanks for registering.");
+    public Long registerUser(RegisterUseCase.RegisterCommand registerCommand) {
+        User user = registerCommand.toModel();
+        user.setRegistrationDate(LocalDateTime.now());
+        // Some logic here
+        if (registerCommand.isSendWelcomeMail()) {
+            sendMailPort.sendMail("Welcome!", "Thanks for registering.");
+        }
+        return saveUserPort.saveUser(SaveUserPort.SaveUserModel.fromModel(user));
     }
-    return saveUserPort.saveUser(user);
-  }
 
 }
