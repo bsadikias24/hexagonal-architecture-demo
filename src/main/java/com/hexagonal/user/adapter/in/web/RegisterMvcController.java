@@ -1,6 +1,5 @@
 package com.hexagonal.user.adapter.in.web;
 
-import com.hexagonal.user.application.model.User;
 import com.hexagonal.user.application.port.in.RegisterUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,13 +14,13 @@ class RegisterMvcController {
   private final RegisterUseCase registerUseCase;
 
   @PostMapping("/mvc/register/")
-  ModelAndView register(@ModelAttribute("user") User user){
+  ModelAndView register(@ModelAttribute("user") UserResource userResource){
 
 
-    registerUseCase.registerUser(new User(user. getName(),user.getEmail()), false);
+    registerUseCase.registerUser(userResource.toModel(), true);
 
     ModelAndView modelAndView = new ModelAndView("registration_success.html");
-    modelAndView.addObject("username", user.getName());
+    modelAndView.addObject("username", userResource.getName());
 
     return modelAndView;
   }

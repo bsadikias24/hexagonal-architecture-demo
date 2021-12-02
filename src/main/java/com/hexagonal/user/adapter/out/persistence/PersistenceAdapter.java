@@ -15,7 +15,10 @@ public class PersistenceAdapter implements SaveUserPort {
 
   @Override
   public Long saveUser(User user) {
-    User savedUser = userRepository.save(user);
-    return savedUser.getId();
+    UserEntity userEntity = new UserEntity(
+            user.getName(),
+            user.getEmail());
+    UserEntity savedUserEntity = userRepository.save(userEntity);
+    return savedUserEntity.getId();
   }
 }
